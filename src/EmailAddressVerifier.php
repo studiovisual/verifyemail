@@ -141,6 +141,7 @@ final class EmailAddressVerifier
 
             $domain  = Utils::extractDomainFromEmail($email);
             $mxHosts = Utils::getMxHosts($domain);
+
             if (empty($mxHosts)) {
                 return $this->currentLevel;
             }
@@ -185,23 +186,19 @@ final class EmailAddressVerifier
         $mailFrom = $this->mailFrom ?? 'user@' . $domain;
 
         $smtp = new SmtpConnection();
-        $smtp->setDebugLevel(5);
+        $smtp->setDebugLevel(0);
         $smtp->connect($mx_host, 25, $this->timeout);
 
         if (!$smtp->connected()) {
             return false;
         }
 
-        if ($this->validationLevelComplete()) {
-            // AddressValidationLevel::SmtpConnection completed
-            $this->mxTransferLogs[$mx_host] = $smtp->transferLogs;
-            $smtp->close();
-            return true;
-        }
-
         $success = ($smtp->hello($domain) && $smtp->mail($mailFrom) && $smtp->recipient($email));
+
         $smtp->quit(true);
         $this->mxTransferLogs[$mx_host] = $smtp->transferLogs;
+        $smtp->close();
+
         return $success;
     }
 

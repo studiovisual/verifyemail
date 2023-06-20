@@ -1,8 +1,8 @@
 {
-  "name": "masroore/verifyemail",
-  "description": "Provides means for verification of e-mail addresses.",
+  "name": "studiovisual/verifyemail",
+  "description": "Provides means for verification of e-mail addresses",
   "type": "library",
-  "homepage": "https://github.com/masroore/verifyemail",
+  "homepage": "https://github.com/studiovisual/verifyemail",
   "keywords": [
     "php",
     "email",
@@ -22,7 +22,9 @@
   },
   "authors": [
     {
-      "name": "Masroor Ehsan",
+      "name": "Lorde Aleister",
+      "email": "lordealeister@gmail.com",
+      "homepage": "https://github.com/lordealeister",
       "role": "Developer"
     }
   ],
